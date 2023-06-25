@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guson_tasks/core/utils/app_assets.dart';
 import 'package:guson_tasks/core/utils/app_colors.dart';
 import 'package:guson_tasks/presentation/views/main_screen/widgets/categories_items.dart';
 import 'package:guson_tasks/presentation/views/main_screen/widgets/custom_header.dart';
@@ -6,7 +7,13 @@ import 'package:guson_tasks/presentation/views/main_screen/widgets/custom_text_f
 import 'package:guson_tasks/presentation/views/main_screen/widgets/main_slider.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
+
+  List<String> images = [
+    AppAssets.dough,
+    AppAssets.vegetables,
+    AppAssets.fruits,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +52,25 @@ class MainScreen extends StatelessWidget {
                 Row(
                   children: [
                     ...List.generate(
-                      4,
-                      (index) => const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      images.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: CategoriesItems(
                           isImage: true,
+                          image: images[index],
                         ),
                       ),
                     ),
+                    const CategoriesItems(
+                      isImage: false,
+                    ),
                   ],
-                )
+                ),
+                CustomHeadline(
+                  leftTitle: 'last items',
+                  isLeftOnly: false,
+                  rightTitle: 'see all',
+                ),
               ],
             ),
           ),
